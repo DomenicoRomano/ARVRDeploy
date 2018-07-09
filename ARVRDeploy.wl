@@ -1,6 +1,6 @@
 (* ::Package:: *)
 
-BeginPackage["VRARDeploy`"]
+BeginPackage["ARVRDeploy`"]
 VRDeploy::usage = "VRDeploy[gr] returns a cloud object to explore the given Graphics3D object in virtual reality.";
 ARDeploy::usage = "ARDeploy[gr] returns a cloud object to navigate the given Graphics3D object in agumented reality.";
 VRInitialize::usage = "VRInitialize[] initializes VRDeploy to use Domenico's default location.
