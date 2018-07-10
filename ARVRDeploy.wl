@@ -15,7 +15,7 @@ $VRInitialization = None;
 
 VRInitialize[] := 
 	$VRInitialization = CloudObject["https://www.wolframcloud.com/objects/zetireticuli20160505121800zT32/VR/"]
-VRIninitialize[co_CloudObject] := Block[
+VRInitialize[co_CloudObject] := Block[
 	{$Permissions = "Public"},
 	CopyDirectory[
 		FileNameJoin[{$path, "VR"}],
@@ -25,7 +25,7 @@ VRIninitialize[co_CloudObject] := Block[
 ]
 ARInitialize[] := 
 	$ARInitialization = CloudObject["https://www.wolframcloud.com/objects/zetireticuli20160505121800zT32/Augment/"]
-ARIninitialize[co_CloudObject] := Block[
+ARInitialize[co_CloudObject] := Block[
 	{$Permissions = "Public"},
 	CopyDirectory[
 		FileNameJoin[{$path, "AR"}],
@@ -58,7 +58,7 @@ Options[ARDeploy] := {
 	"Shader" -> "standard",
 	"Opacity" -> 1,
 	"Scale" -> .3,
-	"Color" -> "Orange",
+	"Color" -> "orange",
 	Permissions -> $Permissions
 };
 ARDeploy[gr_Graphics3D, opts: OptionsPattern[]] /; $ARInitialization === None := (
