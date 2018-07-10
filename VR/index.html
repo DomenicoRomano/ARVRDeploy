@@ -2,7 +2,7 @@
 
 <html lang="en">
 <head>
-<title>VRDeploy Wolfram Mathematica</title>
+<title>VRDeploy Wolfram Cloud</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, shrink-to-fit=no">
 <meta name="mobile-web-app-capable" content="yes">
@@ -261,7 +261,7 @@ mtlLoader.load(getObjectMtl()+".mtl", function (materials) {
   loader2.load(getObject(), function (obj) {
       //add the loaded object to the scene
       //console.log('ci so 1')
-      obj.position.set(0, 0, 0);
+      obj.position.set(0, 0, -4);
       obj.scale.set(.5,.5,.5);
       obj.rotation.set(-Math.PI/2,0,0);
       scene.add(obj);
