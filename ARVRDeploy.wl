@@ -67,7 +67,7 @@ Options[ARDeploy] := {
 	"Opacity" -> 1,
 	"Scale" -> .3,
 	"Color" -> "orange",
-	Permissions -> $Permissions
+	Permissions -> "Public"
 };
 ARDeploy[gr_Graphics3D, opts: OptionsPattern[]] /; $ARInitialization === None := (
 	Message[ARDeploy::notinit];
@@ -82,7 +82,7 @@ ARDeploy[gr_Graphics3D, OptionsPattern[]] /; $ARInitialization =!= None := Cloud
 					FileNameJoin[{$TemporaryDirectory, "file.obj"}],
 					DiscretizeGraphics[gr]
 				],
-				CloudObject[]
+				CloudObject[Permissions -> "Public"]
 			]],
 			"init" -> First[$ARInitialization],
 			"shader" -> OptionValue["Shader"],
@@ -97,6 +97,9 @@ ARDeploy[gr_Graphics3D, OptionsPattern[]] /; $ARInitialization =!= None := Cloud
 
 End[]
 EndPackage[]
+
+
+
 
 
 
