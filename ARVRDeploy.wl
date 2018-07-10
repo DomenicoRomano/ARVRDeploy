@@ -17,6 +17,7 @@ VRInitialize[] :=
 	$VRInitialization = CloudObject["https://www.wolframcloud.com/objects/zetireticuli20160505121800zT32/VR/"]
 VRInitialize[co_CloudObject] := Block[
 	{$Permissions = "Public"},
+	PrintTemporary["Copying files to the cloud, this might take a few minutes\[Ellipsis]"];
 	CopyDirectory[
 		FileNameJoin[{$path, "VR"}],
 		co
@@ -27,6 +28,7 @@ ARInitialize[] :=
 	$ARInitialization = CloudObject["https://www.wolframcloud.com/objects/zetireticuli20160505121800zT32/Augment/"]
 ARInitialize[co_CloudObject] := Block[
 	{$Permissions = "Public"},
+	PrintTemporary["Copying files to the cloud, this might take a few minutes\[Ellipsis]"];
 	CopyDirectory[
 		FileNameJoin[{$path, "AR"}],
 		co
