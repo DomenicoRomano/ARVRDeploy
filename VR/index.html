@@ -150,9 +150,8 @@ function onLoad() {
   effect = new THREE.VREffect(renderer);
   effect.setSize(window.innerWidth, window.innerHeight);
   // Add a repeating grid as a skybox.
-  //var loader = new THREE.TextureLoader();
-  //loader.load('img/box.png', onTextureLoaded);
-  
+  var loader = new THREE.TextureLoader();
+  loader.load('img/box.png', onTextureLoaded);
   // Create 3D objects.
   //var geometry = new THREE.BoxGeometry(0.1, 0.1, 0.1);
   //var material = new THREE.MeshNormalMaterial();
