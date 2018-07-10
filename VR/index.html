@@ -249,9 +249,9 @@ function onLoad() {
 var mtlLoader = new THREE.MTLLoader();
 mtlLoader.setPath('');
 mtlLoader.load(getObjectMtl()+".mtl", function (materials) { 
-  console.log("carico_materiale")
+  //console.log("carico_materiale")
   materials.preload();  
-  console.log(materials)
+  //console.log(materials)
   //materials.materials.default.map.magFilter = THREE.NearestFilter;
   //materials.materials.default.map.minFilter = THREE.LinearFilter;
 
@@ -261,7 +261,7 @@ mtlLoader.load(getObjectMtl()+".mtl", function (materials) {
   loader2.load(getObject(), function (obj) {
       //add the loaded object to the scene
       //console.log('ci so 1')
-      obj.position.set(0, 0, -3);
+      obj.position.set(0, 0, 0);
       obj.scale.set(.5,.5,.5);
       obj.rotation.set(-Math.PI/2,0,0);
       scene.add(obj);
