@@ -44,7 +44,13 @@ VRDeploy[gr_Graphics3D] /; $VRInitialization === None := (
 VRDeploy[gr_Graphics3D] /; $VRInitialization =!= None := 
 Hyperlink[
 	URLBuild[
-		First[$VRInitialization],
+		Replace[
+			First[$VRInitialization],
+			{
+				s_ /; StringMatchQ[s, ___ ~~ "/" ~~ EndOfString] :> s,
+				s_ :> s <> "/"
+			}
+		],
 		{"url" -> First[CopyFile[
 			Export[
 				FileNameJoin[{$TemporaryDirectory, "file.obj"}],
