@@ -36,12 +36,14 @@ ARInitialize[co_CloudObject] := Block[
 	$ARInitialization = co
 ]
 VRDeploy::notinit = "VRDeploy is not initialized, please run VRInitialize."
-VRDeploy[gr_Graphics3D] /; $VRInitialization === None := (
+VRDeploy[gr_] /; $VRInitialization === None := (
 	Message[VRDeploy::notinit];
 	VRDeploy[gr] /; False
 )
-
-VRDeploy[gr_Graphics3D] /; $VRInitialization =!= None := 
+Options[VRDeploy] := {
+	"Normal" -> False
+};
+VRDeploy[gr_, OptionsPattern[]] /; $VRInitialization =!= None := 
 Hyperlink[
 	URLBuild[
 		Replace[
@@ -54,7 +56,8 @@ Hyperlink[
 		{"url" -> First[CopyFile[
 			Export[
 				FileNameJoin[{$TemporaryDirectory, "file.obj"}],
-				DiscretizeGraphics[gr]
+				If["Normal",normalize[gr],
+					DiscretizeGraphics[gr]]
 			],
 			CloudObject[Permissions -> "Public"]
 		]]}
@@ -67,20 +70,21 @@ Options[ARDeploy] := {
 	"Opacity" -> 1,
 	"Scale" -> .3,
 	"Color" -> "orange",
+	"Normal" -> False,
 	Permissions -> "Public"
 };
-ARDeploy[gr_Graphics3D, opts: OptionsPattern[]] /; $ARInitialization === None := (
+ARDeploy[gr_, opts: OptionsPattern[]] /; $ARInitialization === None := (
 	Message[ARDeploy::notinit];
 	ARDeploy[gr, opts] /; False
 )
-ARDeploy[gr_Graphics3D, OptionsPattern[]] /; $ARInitialization =!= None := CloudExport[
+ARDeploy[gr_, OptionsPattern[]] /; $ARInitialization =!= None := CloudExport[
 	TemplateApply[
 		StringTemplate[File[FileNameJoin[{$path, "AR", "ar_template.html"}]]], 
 		<|
 			"url" -> First[CopyFile[
 				Export[
 					FileNameJoin[{$TemporaryDirectory, "file.obj"}],
-					DiscretizeGraphics[gr]
+					If["Normal",normalize[gr],DiscretizeGraphics[gr]]
 				],
 				CloudObject[Permissions -> "Public"]
 			]],
@@ -93,6 +97,17 @@ ARDeploy[gr_Graphics3D, OptionsPattern[]] /; $ARInitialization =!= None := Cloud
 	],
 	{None, "text/html"},
 	Permissions -> OptionValue[Permissions]
+]
+
+normalize[notreg_Graphics3D] := normalize[DiscretizeGraphics[notreg]]
+normalize[reg_?RegionQ] /; RegionEmbeddingDimension[reg] < 3 :=
+	normalize[RegionProduct[reg, Point[{0}]]]
+normalize[reg_?RegionQ] /; RegionEmbeddingDimension[reg] === 3 := TransformedRegion[
+	TransformedRegion[
+		reg,
+		TranslationTransform[-RegionCentroid[reg]]
+	],
+	ScalingTransform[ConstantArray[2/Max[Abs @* Subtract @@@ RegionBounds[reg]], 3]]
 ]
 
 End[]
