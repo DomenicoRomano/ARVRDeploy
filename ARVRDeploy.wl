@@ -68,8 +68,8 @@ ARDeploy::notinit = "ARDeploy is not initialized, please run ARInitialize."
 Options[ARDeploy] := {
 	"Shader" -> "standard",
 	"Opacity" -> 1,
-	"Scale" -> .3,
-	"Color" -> "orange",
+	"Scale" -> 0.3,
+	"Color" -> "red",
 	"Normal" -> False,
 	Permissions -> "Public"
 };
