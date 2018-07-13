@@ -56,8 +56,7 @@ Hyperlink[
 		{"url" -> First[CopyFile[
 			Export[
 				FileNameJoin[{$TemporaryDirectory, "file.obj"}],
-				If["Normal",normalize[gr],
-					DiscretizeGraphics[gr]]
+				DiscretizeGraphics[gr]
 			],
 			CloudObject[Permissions -> "Public"]
 		]]}
@@ -84,7 +83,7 @@ ARDeploy[gr_, OptionsPattern[]] /; $ARInitialization =!= None := CloudExport[
 			"url" -> First[CopyFile[
 				Export[
 					FileNameJoin[{$TemporaryDirectory, "file.obj"}],
-					If["Normal",normalize[gr],DiscretizeGraphics[gr]]
+					DiscretizeGraphics[gr]
 				],
 				CloudObject[Permissions -> "Public"]
 			]],
