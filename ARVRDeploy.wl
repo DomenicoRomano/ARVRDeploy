@@ -70,6 +70,9 @@ Options[ARDeploy] := {
 	"Scale" -> 0.3,
 	"Color" -> "red",
 	"Normal" -> False,
+	"PosX" -> 0,
+	"PosY" -> 0,
+	"PosZ" -> 0,
 	Permissions -> "Public"
 };
 ARDeploy[gr_, opts: OptionsPattern[]] /; $ARInitialization === None := (
@@ -91,7 +94,10 @@ ARDeploy[gr_, OptionsPattern[]] /; $ARInitialization =!= None := CloudExport[
 			"shader" -> OptionValue["Shader"],
 			"opacity" -> OptionValue["Opacity"],
 			"scale" -> OptionValue["Scale"],
-			"color" -> OptionValue["Color"]
+			"color" -> OptionValue["Color"],
+			"posX" -> OptionValue["PosX"],
+			"posY" -> OptionValue["PosY"],
+			"posZ" -> OptionValue["PosZ"]
 		|>
 	],
 	{None, "text/html"},
