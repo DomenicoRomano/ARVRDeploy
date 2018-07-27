@@ -239,65 +239,75 @@ function onLoad() {
 
   function getObject() {
     var params = url_query_decode(url_parse(window.location.href).search.substring(1))
-    return params.url || "plot.obj"
+    return params.url || "plot.wrl"
   }
-  function getObjectMtl() {
-    var params2 = url_query_decode(url_parse(window.location.href).search.substring(1))
-    return params2.url || "plot.obj.mtl"
-  }
-  console.log(getObjectMtl()+".mtl");
-
-var mtlLoader = new THREE.MTLLoader();
-mtlLoader.setPath('');
-mtlLoader.load(getObjectMtl()+".mtl", function (materials) { 
-  //console.log("carico_materiale")
-  materials.preload();  
-  //console.log(materials)
-  //materials.materials.default.map.magFilter = THREE.NearestFilter;
-  //materials.materials.default.map.minFilter = THREE.LinearFilter;
-
-  var loader2 = new THREE.OBJLoader();
-  loader2.setMaterials(materials);
   
-  loader2.load(getObject(), function (obj) {
-      //add the loaded object to the scene
-      //console.log('ci so 1')
-      obj.position.set(0, 0, -4);
-      obj.scale.set(.5,.5,.5);
-      obj.rotation.set(-Math.PI/2,0,0);
-      scene.add(obj);
-      obj.traverse(function(child) {
-          if(child.isMesh && child.geometry.isBufferGeometry) { 
-             child.geometry = new THREE.Geometry().fromBufferGeometry(child.geometry);
-             child.geometry.computeFaceNormals();
-             child.geometry.mergeVertices();
-             child.geometry.computeVertexNormals(true);
-                      }
-       });
-  })
-  
+//vecchio codice per i materiali
+//  function getObjectMtl() {
+//    var params2 = url_query_decode(url_parse(window.location.href).search.substring(1))
+//    return params2.url || "plot.obj.mtl"
+//  }
+//  console.log(getObjectMtl()+".mtl");
 
-      // obj.rotation.y += 30000 * 0.0004;
-
-     // var material = new THREE.MeshLambertMaterial( {
-          // color: 0x01BE00,
-          // side: THREE.Both,
-          // color: "rgb(0,153,204)",
-      //    wireframe : false,   
-          // THREE.DoubleSide,
-      //});
-      
-      //var box = new THREE.BoxHelper( obj, 0xffff00 );
-      //scene.add( box );
-
-      var axesHelper = new THREE.AxesHelper( 5 );
-      scene.add( axesHelper );
+var loader = new THREE.VRMLLoader();
+loader.load( getObject(), function ( object ) {
+  object.position.set(0,-1,0);
+  scene.add( object );
+} );
 
 
-      //console.log('ci so 2')
-      
-      },
-  ); //#######################################################################
+//VECCHIO CODICE PER MTL E OBJ
+//var mtlLoader = new THREE.MTLLoader();
+//mtlLoader.setPath('');
+//mtlLoader.load(getObjectMtl()+".mtl", function (materials) { 
+//  console.log("carico_materiale")
+//  materials.preload();  
+//  console.log(materials)
+//  //materials.materials.default.map.magFilter = THREE.NearestFilter;
+//  //materials.materials.default.map.minFilter = THREE.LinearFilter;
+//
+//  var loader2 = new THREE.OBJLoader();
+//  loader2.setMaterials(materials);
+//  
+//  loader2.load(getObject(), function (obj) {
+//      //add the loaded object to the scene
+//      //console.log('ci so 1')
+//      obj.position.set(0, -1, 0);
+//      obj.scale.set(.5,.5,.5);
+//      obj.rotation.set(-Math.PI/2,0,0);
+//      scene.add(obj);
+//      obj.traverse(function(child) {
+//          if(child.isMesh && child.geometry.isBufferGeometry) { 
+//             child.geometry = new THREE.Geometry().fromBufferGeometry(child.geometry);
+//             child.geometry.computeFaceNormals();
+//             child.geometry.mergeVertices();
+//             child.geometry.computeVertexNormals(true);
+//                      }
+//       });
+//  })
+//  
+//
+//      // obj.rotation.y += 30000 * 0.0004;
+//
+//     // var material = new THREE.MeshLambertMaterial( {
+//          // color: 0x01BE00,
+//          // side: THREE.Both,
+//          // color: "rgb(0,153,204)",
+//      //    wireframe : false,   
+//          // THREE.DoubleSide,
+//      //});
+//      
+//      //var box = new THREE.BoxHelper( obj, 0xffff00 );
+//      //scene.add( box );
+//
+//      var axesHelper = new THREE.AxesHelper( 5 );
+//      scene.add( axesHelper );
+//
+//
+//      //console.log('ci so 2')
+//      
+//      },
+//  ); //#######################################################################
 }
 
 function onTextureLoaded(texture) {
