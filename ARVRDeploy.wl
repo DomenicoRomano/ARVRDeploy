@@ -56,7 +56,7 @@ Hyperlink[
 		{"url" -> First[CopyFile[
 			Export[
 				FileNameJoin[{$TemporaryDirectory, "file.obj"}],
-				DiscretizeGraphics[gr]
+				gr
 			],
 			CloudObject[Permissions -> "Public"]
 		]]}
