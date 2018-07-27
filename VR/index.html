@@ -252,6 +252,7 @@ function onLoad() {
 var loader = new THREE.VRMLLoader();
 loader.load( getObject(), function ( object ) {
   object.position.set(0,-1,0);
+  object.rotation.set(-Math.PI/2,0,0);
   scene.add( object );
 } );
 
