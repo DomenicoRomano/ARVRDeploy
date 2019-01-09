@@ -68,7 +68,7 @@ Options[ARDeploy] := {
 	"Shader" -> "standard",
 	"Opacity" -> 1,
 	"Scale" -> 0.3,
-	"Color" -> "red",
+	"Color" -> "orange",
 	"Normal" -> False,
 	"PosX" -> 0,
 	"PosY" -> 0,
